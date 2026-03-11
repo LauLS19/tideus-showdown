@@ -22097,4 +22097,62 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		type: "Fire",
 		contestType: "Beautiful",
 	},
+	tidesmash: {
+  		name: "Tide Smash",
+  		type: 'Water',
+  		category: 'Physical',
+  		pp: 10,
+  		basePower: 35,
+  		accuracy: 100,
+		priority: 0,
+		target: "normal",
+  		multihit: 2, // siempre golpea exactamente 2 veces
+  		flags: {protect: 1, mirror: 1, punch: 1, contact: 1},
+  		// Cada golpe baja -1 SpD al objetivo (total -2)
+  		secondary: {
+    		chance: 100,
+    		boosts: {spd: -1},
+  		},
+	},
+	mysticparting: {
+  		name: "Mystic Parting",
+  		type: 'Fire',
+  		category: 'Status',
+  		pp: 10,
+  		basePower: 0,
+  		accuracy: 100,
+		priority: 0,
+		target: "normal",
+  		flags: {protect: 1, mirror: 1},
+  		// Baja SpAtk y SpDef del objetivo, luego el usuario se retira
+  		boosts: {spa: -1, spd: -1},
+  		selfSwitch: true, // fuerza el cambio del usuario tras usarlo
+	},
+	timbercleave: {
+  		name: "Timber Cleave",
+  		type: 'Steel',
+  		category: 'Physical',
+  		pp: 10,
+  		basePower: 85,
+  		accuracy: 100,
+		priority: 0,
+		target: "normal",
+  		flags: {protect: 1, mirror: 1, slicing: 1, contact: 1}, // slicing = potenciado por Cortante
+  		// Ignora la resistencia de tipo Planta al Acero y lo trata como súper efectivo
+  		onEffectiveness(typeMod, target, type, move) {
+    		if (type === 'Grass') return 1; // fuerza x2 contra Planta ignorando resistencia
+  		},
+	},
+	snowdrift: {
+  		name: "Snow Drift",
+  		type: 'Ice',
+  		category: 'Physical',
+  		pp: 20,
+  		basePower: 70,
+  		accuracy: 100,
+		priority: 0,
+		target: "normal",
+  		flags: {protect: 1, mirror: 1, contact: 1},
+  		selfSwitch: true, // el usuario se retira tras golpear (como Voltio Cruel / U-turn)
+	},
 };

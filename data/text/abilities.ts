@@ -2281,4 +2281,15 @@ export const AbilitiesText: { [id: IDEntry]: AbilityText } = {
 
 		activate: "  [POKEMON] extends [MOVE] by 2 turns!",
 	},
+	harpoonfist: {
+		name: "Harpoon Fist",
+  		shortDesc: "Punch moves use target's Sp. Def; 1.2x power, 1.5x with Punching Glove.",
+  		desc: "This Pokemon's punching moves calculate damage using the target's Sp. Def instead of Def. Damage is multiplied by 1.2, or 1.5 if this Pokemon holds a Punching Glove.",
+
+	},
+	transmutation: {
+		name: "Transmutation",
+  		shortDesc: "Absorbs elemental status moves targeting self or allies; restores 33% max HP.",
+  		desc: "This Pokemon and its allies are immune to elemental status moves (like Thunder Wave, Will-O-Wisp, Toxic). If this Pokemon is targeted by such a move, it restores 33% of its max HP instead.",
+	}
 };

@@ -5614,4 +5614,42 @@ export const Abilities: import('../sim/dex-abilities').AbilityDataTable = {
 		rating: 3,
 		num: -3,
 	},
+	harpoonfist: {
+  		// Redirige el cálculo de daño al stat de Defensa Especial del objetivo
+  		onModifyMove(move, pokemon) {
+    		if (move.flags['punch']) {
+      			move.overrideDefensiveStat = 'spd';
+    		}
+  		},
+  		onModifyAtk(atk, pokemon, target, move) {
+    		if (move.flags['punch']) {
+      			const item = pokemon.getItem();
+      			if (item.id === 'punchingglove') return this.chainModify(1.5);
+      			return this.chainModify(1.2);
+    		}
+  		},
+  		name: "Harpoon Fist",
+},
+	transmutation: {
+  		// Intercepta movimientos de estado elementales
+  		onAnyTryHit(target, source, move) {
+    		// Solo actúa si el objetivo es este Pokémon o un aliado
+    		if (target.side !== this.effectState.target.side) return;
+    		// El movimiento debe ser de estado y de tipo elemental
+    		if (move.category !== 'Status') return;
+    		const elementalTypes = ['Fire','Water','Electric','Ice','Grass','Poison','Ground','Flying','Psychic','Bug','Rock','Ghost','Dragon','Dark','Steel','Fairy'];
+    		if (!elementalTypes.includes(move.type)) return;
+    		// Si el objetivo es este Pokémon, absorbe y cura
+    		if (target === this.effectState.target) {
+      			this.heal(Math.floor(target.maxhp / 3));
+      			this.add('-activate', target, 'ability: Transmutation');
+      			return null; // cancela el movimiento
+    		}
+    		// Si el objetivo es un aliado, simplemente lo bloquea
+    		if (target !== this.effectState.target) {
+      			return null;
+    		}
+  		},
+  		name: "Transmutation",
+	},
 };

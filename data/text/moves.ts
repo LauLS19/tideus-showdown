@@ -7612,4 +7612,24 @@ export const MovesText: { [id: IDEntry]: MoveText } = {
 			shortDesc: "Nearly always goes first. Always crits.",
 		},
 	},
+	tidesmash: {
+		name: "Tide Smash",
+		desc: "Hits twice. Each hit has a 100% chance to lower the target's Sp. Def by 1 stage.",
+  		shortDesc: "Hits twice. Each hit: 100% chance -1 Sp. Def.",
+	},
+	mysticparting: {
+		name: "Mystic Parting",
+		desc: "Lowers the target's Sp. Atk and Sp. Def by 1 stage each, then the user switches out.",
+  		shortDesc: "-1 SpA and SpD to target, then user switches.",
+	},
+	timbercleave: {
+		name: "Timber Cleave",
+		desc: "A slicing move. Super effective against Grass-types, ignoring their Steel resistance.",
+  		shortDesc: "Slicing. Always super effective vs Grass-types.",
+	},
+	snowdrift: {
+		name: "Snow Drift",
+		desc: "The user strikes with an icy slide and immediately switches out.",
+  		shortDesc: "User switches out after dealing damage.",
+	}
 };
